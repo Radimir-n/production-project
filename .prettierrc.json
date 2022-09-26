@@ -1,7 +1,7 @@
 {
     "printWidth": 100,
     "bracketSameLine": false,
-    "jsxSingleQuote": false,
+    "jsxSingleQuote": true,
     "proseWrap": "always",
     "quoteProps": "as-needed",
     "semi": true,

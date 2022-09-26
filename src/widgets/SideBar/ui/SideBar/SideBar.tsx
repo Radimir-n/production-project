@@ -12,6 +12,7 @@ export const SideBar = ({ className }: SideBarProps) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const onToggle = () => {
         setIsCollapsed((prev) => !prev);
+        console.log('kek');
     };
     return (
         <div className={classNames(cls.SideBar, { [cls.collapsed]: isCollapsed }, [className])}>
