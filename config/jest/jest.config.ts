@@ -14,14 +14,7 @@ export default {
     // cacheDirectory: "/private/var/folders/qx/xgj7fl4d2hn_rftfnnl_rrqc0000gp/T/jest_dy",
 
     // Automatically clear mock calls, instances, contexts and results before every test
-    preset: 'ts-jest',
-    // globals: {
-    //     'ts-jest': {
-    //         diagnostics: false,
-    //     },
-    // },
     clearMocks: true,
-    testEnvironment: 'jsdom',
     coveragePathIgnorePatterns: [
         '/node_modules/',
     ],
