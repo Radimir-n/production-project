@@ -11,9 +11,17 @@ describe('className', () => {
         expect(classNames('class', {}, ['cls cls2'])).toBe('class cls cls2');
     });
     test('classNames with mods and additionals', () => {
-        expect(classNames('class', { hovered: true, active: false }, ['cls3', 'cls4'])).toBe('class hovered cls3 cls4');
+        expect(classNames(
+            'class',
+            { hovered: true, active: false },
+            ['cls3', 'cls4'],
+        )).toBe('class hovered cls3 cls4');
     });
     test('classNames with undefined mods', () => {
-        expect(classNames('class', { hovered: true, active: undefined }, ['cls3', 'cls4'])).toBe('class hovered cls3 cls4');
+        expect(classNames(
+            'class',
+            { hovered: true, active: undefined },
+            ['cls3', 'cls4'],
+        )).toBe('class hovered cls3 cls4');
     });
 });

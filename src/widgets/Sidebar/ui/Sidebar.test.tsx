@@ -1,8 +1,8 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { renderWithTranslation } from 'shared/lib/tests/renderWithTranslations/renderWithTranslations';
+import {
+    renderWithTranslation,
+} from 'shared/lib/tests/renderWithTranslations/renderWithTranslations';
 import { Sidebar } from '..';
-
-
 
 describe('Sidebar', () => {
     test('with only first param', () => {
