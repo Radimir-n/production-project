@@ -3,8 +3,8 @@ import './styles/index.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
-import { SideBar } from 'widgets/SideBar';
-import { Suspense, useEffect } from 'react';
+import { Sidebar } from 'widgets/Sidebar';
+import { Suspense } from 'react';
 
 export function App() {
     const { theme } = useTheme();
@@ -14,7 +14,7 @@ export function App() {
             <Suspense fallback>
                 <Navbar />
                 <div className="content-page">
-                    <SideBar />
+                    <Sidebar />
                     <AppRouter />
                 </div>
             </Suspense>
