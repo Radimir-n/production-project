@@ -4,5 +4,7 @@
   "Язык": "Русский",
   "Страница не найдена": "Page not found",
   "Произошла непредвиденная ошибка": "Somthing went wrond",
-  "Обновить страницу": "Reload page"
+  "Обновить страницу": "Reload page",
+  "Main":"Main",
+  "About":"About"
 }
