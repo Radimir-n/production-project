@@ -13,6 +13,7 @@ export function App() {
         <div className={classNames('app', { hovered: true, select: false }, [theme, 'cls'])}>
             <Suspense fallback>
                 <Navbar />
+
                 <div className="content-page">
                     <Sidebar />
                     <AppRouter />
