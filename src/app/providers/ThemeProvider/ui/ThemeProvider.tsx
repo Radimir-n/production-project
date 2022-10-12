@@ -16,7 +16,8 @@ const ThemeProvider: FC<ThemeProviderProps> = (props) => {
         children,
         initialtheme,
     } = props;
-    const [theme, setTheme] = useState<Theme>(initialtheme || defaultTheme);
+
+    const [theme, setTheme] = useState<Theme>(defaultTheme);
 
     const defaultProps = useMemo(
         () => ({
@@ -25,6 +26,7 @@ const ThemeProvider: FC<ThemeProviderProps> = (props) => {
         }),
         [theme],
     );
+    document.body.className = theme;
     return (
         <ThemeContext.Provider value={defaultProps}>
             {children}

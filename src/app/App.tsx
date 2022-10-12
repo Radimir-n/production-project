@@ -10,7 +10,7 @@ export function App() {
     const { theme } = useTheme();
 
     return (
-        <div className={classNames('app', { hovered: true, select: false }, [theme, 'cls'])}>
+        <div className={classNames('app', { hovered: true, select: false }, [])}>
             <Suspense fallback>
                 <Navbar />
 

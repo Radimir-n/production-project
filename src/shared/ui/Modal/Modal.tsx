@@ -1,3 +1,4 @@
+import { useTheme } from 'app/providers/ThemeProvider';
 import React, { ReactNode, useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Portal } from '../Portal/Portal';
@@ -11,6 +12,7 @@ interface ModalProps {
 }
 
 export const Modal = ({ className, children, isOpen, onClose }: ModalProps) => {
+    const { theme } = useTheme();
     const handlerOnClose = useCallback(() => {
         onClose();
     }, [onClose]);
