@@ -1,5 +1,4 @@
-import { useTheme } from 'app/providers/ThemeProvider';
-import React, { ReactNode, useCallback, useEffect } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Portal } from '../Portal/Portal';
 import cls from './Modal.module.scss';
@@ -9,10 +8,11 @@ interface ModalProps {
    children?:ReactNode;
    isOpen?:boolean
    onClose?: () => void
+   lazy?:boolean
 }
 
-export const Modal = ({ className, children, isOpen, onClose }: ModalProps) => {
-    const { theme } = useTheme();
+export const Modal = ({ className, children, isOpen, onClose, lazy }: ModalProps) => {
+    const [isMounted, setIsMounted] = useState(false);
     const handlerOnClose = useCallback(() => {
         onClose();
     }, [onClose]);
@@ -36,6 +36,14 @@ export const Modal = ({ className, children, isOpen, onClose }: ModalProps) => {
             window.removeEventListener('keydown', onKeydown);
         };
     }, [isOpen, onKeydown]);
+    useEffect(() => {
+        if (isOpen) {
+            setIsMounted(true);
+        }
+    }, [isOpen]);
+    if (lazy && !isMounted) {
+        return null;
+    }
     return (
         <Portal>
             <div className={classNames(cls.Modal, mods, [className])}>
