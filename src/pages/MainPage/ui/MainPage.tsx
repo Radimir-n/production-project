@@ -1,10 +1,7 @@
-import { Counter } from 'enteties/Counter';
-
-// eslint-disable-next-line i18next/no-literal-string
 const MainPage = () => (
+    // eslint-disable-next-line i18next/no-literal-string
     <div>
-        <Counter />
-        {/* MainPage */}
+        MainPage
     </div>
 );
 

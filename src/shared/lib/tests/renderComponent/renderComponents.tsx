@@ -17,7 +17,7 @@ export function renderComponent(component:ReactNode, options:renderComponentOpti
         inirialState,
     } = options;
     return render(
-        <StoreProvider inirialState={inirialState}>
+        <StoreProvider initialState={inirialState}>
             <MemoryRouter initialEntries={[route]}>
                 <I18nextProvider i18n={i18n}>
                     {component}

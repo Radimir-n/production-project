@@ -1,13 +1,19 @@
-import { useTheme } from 'app/providers/ThemeProvider';
 import './styles/index.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Sidebar } from 'widgets/Sidebar';
+import { AppDispatch } from 'shared/types/customTypes';
+import { useDispatch } from 'react-redux';
+import { userActions } from 'enteties/User';
 
 export function App() {
-    const { theme } = useTheme();
+    const dispatch:AppDispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(userActions.initAuthData());
+    }, [dispatch]);
 
     return (
         <div className={classNames('app', { hovered: true, select: false }, [])}>
