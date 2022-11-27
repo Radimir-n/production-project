@@ -1,12 +1,12 @@
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
-import { AppDispatch } from 'shared/types/customTypes';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getLoginStateUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginStatePassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginStateIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -16,32 +16,42 @@ import { loginByUsername } from '../../model/services/loginByUsername/loginByUse
 import cls from './LoginForm.module.scss';
 
 interface LoginFormProps {
-   className?: string;
+    className?: string;
+    onSuccess: () => void;
 }
 // Вынесли для того что бы не создавалась новая ссылка объекта в пропсе
-const initialReducers :ReducersList = {
+const initialReducers: ReducersList = {
     loginForm: loginReducer,
 };
 
-const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     const { t } = useTranslation();
-    const dispatch : AppDispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const username = useSelector(getLoginStateUsername);
     const password = useSelector(getLoginStatePassword);
     const isLoading = useSelector(getLoginStateIsLoading);
     const error = useSelector(getLoginStateError);
 
-    const onChangeUsername = useCallback((value:string) => {
-        dispatch(loginActions.setUsername(value));
-    }, [dispatch]);
+    const onChangeUsername = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setUsername(value));
+        },
+        [dispatch],
+    );
 
-    const onChangePassword = useCallback((value:string) => {
-        dispatch(loginActions.setPassword(value));
-    }, [dispatch]);
+    const onChangePassword = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setPassword(value));
+        },
+        [dispatch],
+    );
 
-    const onLoginClick = useCallback(() => {
-        dispatch(loginByUsername({ username, password }));
+    const onLoginClick = useCallback(async () => {
+        const result = await dispatch(loginByUsername({ username, password }));
+        // if (result.meta.requestStatus === 'fulfilled') {
+        //     // onSuccess();
+        // }
     }, [dispatch, username, password]);
 
     return (
@@ -63,7 +73,6 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
                 </Button>
             </div>
         </DynamicModuleLoader>
-
     );
 });
 
