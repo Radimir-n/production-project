@@ -1,26 +1,19 @@
-import React, { InputHTMLAttributes, memo, useEffect, useRef } from 'react';
+import React, { InputHTMLAttributes, memo, MutableRefObject, useEffect, useRef } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Input.module.scss';
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLButtonElement>, 'value'| 'onChange'>
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLButtonElement>, 'value' | 'onChange'>;
 
-interface InputProps extends HTMLInputProps{
-   className?: string;
-   value?:string;
-   onChange?:(value:string) => void
-   autoFocus?:boolean
+interface InputProps extends HTMLInputProps {
+  className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  autoFocus?: boolean;
 }
 
 export const Input = memo((props: InputProps) => {
-    const {
-        className,
-        value,
-        onChange,
-        type = 'text',
-        autoFocus,
-        ...otherProps
-    } = props;
-    const ref = useRef<HTMLInputElement | null>(null);
+    const { className, value, onChange, type = 'text', autoFocus, ...otherProps } = props;
+    const ref = useRef() as MutableRefObject<HTMLInputElement>;
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value);
     };
@@ -33,13 +26,8 @@ export const Input = memo((props: InputProps) => {
 
     return (
         <div className={classNames(cls.Input, {}, [className])}>
-            <input
-                ref={ref}
-                type={type}
-                value={value}
-                onChange={onChangeHandler}
-                {...otherProps}
-            />
+            {/* @ts-ignore */}
+            <input ref={ref} type={type} value={value} onChange={onChangeHandler} {...otherProps} />
         </div>
     );
 });

@@ -18,31 +18,15 @@ export default {
     // Automatically clear mock calls, instances, contexts and results before every test
     globals: {
         __IS_DEV__: true,
+        __API__: '',
     },
     clearMocks: true,
-    coveragePathIgnorePatterns: [
-        '/node_modules/',
-    ],
-    moduleDirectories: [
-        'node_modules',
-    ],
+    coveragePathIgnorePatterns: ['/node_modules/'],
+    moduleDirectories: ['node_modules'],
 
-    moduleFileExtensions: [
-        'js',
-        'mjs',
-        'cjs',
-        'jsx',
-        'ts',
-        'tsx',
-        'json',
-        'node',
-    ],
-    modulePaths: [
-        '<rootDir>src',
-    ],
-    testMatch: [
-        '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)',
-    ],
+    moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node'],
+    modulePaths: ['<rootDir>src'],
+    testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
     rootDir: '../../',
     setupFilesAfterEnv: ['<rootDir>config/jest/setupTest.ts'],
     moduleNameMapper: {

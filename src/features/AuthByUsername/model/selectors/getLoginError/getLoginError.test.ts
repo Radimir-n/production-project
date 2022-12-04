@@ -1,10 +1,9 @@
-﻿import { DeepPartial } from '@reduxjs/toolkit';
-import { StateSchema } from 'app/providers/StoreProvider';
+﻿import { StateSchema } from 'app/providers/StoreProvider';
 import { getLoginStateError } from './getLoginError';
 
 describe('getErrorLogin.test', () => {
     test('should return error', () => {
-        const state:DeepPartial<StateSchema> = {
+        const state: DeepPartial<StateSchema> = {
             loginForm: {
                 error: 'error',
             },
@@ -13,7 +12,7 @@ describe('getErrorLogin.test', () => {
     });
 
     test('should work with empty state', () => {
-        const state:DeepPartial<StateSchema> = {};
+        const state: DeepPartial<StateSchema> = {};
         expect(getLoginStateError(state as StateSchema)).toEqual(undefined);
     });
 });
