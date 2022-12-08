@@ -16,7 +16,7 @@
 			"const { t } = useTranslation();",
 			"",
 			"\treturn (",
-			"\t\t<div className={classNames(cls.ProfileCard, {}, [className])} />",
+			"\t\t<div className={classNames(cls.${1:${TM_FILENAME_BASE}}, {}, [className])} />",
 			"\t);",
 			"};",
 			"",

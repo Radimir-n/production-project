@@ -1,6 +1,7 @@
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { ProfileSchema } from 'enteties/Profile/types/profile';
+import { ProfileSchema } from 'enteties/Profile';
+
 import { UserSchema } from 'enteties/User';
 import { LoginSchema } from 'features/AuthByUsername';
 
@@ -33,4 +34,5 @@ export interface ThunkExtraArg {
 export interface ThunkConfig<T> {
   rejectValue: T;
   extra: ThunkExtraArg;
+  state: StateSchema;
 }
