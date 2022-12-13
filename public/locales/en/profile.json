@@ -5,5 +5,10 @@
   "Ваша фамилия": "Last name",
   "Произошла ошибка при загрузке профиля": "An error occurred while loading the profile",
   "Попробуйте обновить страницу": "Try refreshing the page",
-  "Сохранить": "Save"
+  "Сохранить": "Save",
+  "Серверная ошибка при сохранении":"Server error on save",
+  "Некорректный регион": "Incorrect region",
+  "Данные не указаны":"Data not specified",
+  "Имя и фамилия обязательны":"First and last name are required",
+  "Некорректный возраст": "Incorrect age"
 }
