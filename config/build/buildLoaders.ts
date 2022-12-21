@@ -1,19 +1,12 @@
 import webpack from 'webpack';
+import { buildBabelLoader } from './loaders/buildBabelLoader';
 import { buildCssLoaders } from './loaders/buildCssLoaders';
 import { BuildOptions } from './types/config';
 
 // Порядок лоадеров важен!
-export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
-    const bableLoader = {
-        test: /\.(js|jsx|tsx)/,
-        exclude: /node_modules/,
-        use: {
-            loader: 'babel-loader',
-            options: {
-                presets: ['@babel/preset-env'],
-            },
-        },
-    };
+export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
+    const { isDev } = options;
+    const bableLoader = buildBabelLoader(options);
     const fileLoader = {
         test: /\.(png|jpe?g|gif|woff2|woff)$/i,
         use: [

@@ -35,8 +35,8 @@ const ProfilePage = () => {
     const isLoading = useSelector(getProfileIsLoading);
     const error = useSelector(getProfileError);
     const readonly = useSelector(getProfileReadonly);
-    // const validateErrors = useSelector(getProfileValidateErrors);
-    console.log(formData);
+    const validateErrors = useSelector(getProfileValidateErrors);
+
     const validateErrorTranslate = {
         [ValidateProfileError.SERVER_ERROR]: t('Серверная ошибка при сохранении'),
         [ValidateProfileError.NO_DATA]: t('Некорректный регион'),
@@ -45,7 +45,9 @@ const ProfilePage = () => {
         [ValidateProfileError.INCORRECT_AGE]: t('Некорректный возраст'),
     };
     useEffect(() => {
-        dispatch(fetchProfileData());
+        if (__PROJECT__ !== 'storybook') {
+            dispatch(fetchProfileData());
+        }
     }, [dispatch]);
 
     const onChangeFirstname = useCallback(
@@ -102,13 +104,13 @@ const ProfilePage = () => {
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <ProfilePageHeader />
-            {/* {validateErrors?.length && validateErrors.map((err) => (
+            {validateErrors?.length && validateErrors.map((err) => (
                 <Text
                     key={err}
                     theme={TextTheme.ERROR}
                     text={validateErrorTranslate[err]}
                 />
-            ))} */}
+            ))}
             <ProfileCard
                 data={formData}
                 isLoading={isLoading}
