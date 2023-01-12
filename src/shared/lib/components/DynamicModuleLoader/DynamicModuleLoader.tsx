@@ -13,27 +13,27 @@ interface DynamicModuleLoaderProps {
 }
 
 export const DynamicModuleLoader: FC<DynamicModuleLoaderProps> = (props) => {
-    const { children, reducers, removeAfterUnmount } = props;
-    const store = useStore() as ReduxStoreManager;
-    const dispatch = useAppDispatch();
+  const { children, reducers, removeAfterUnmount } = props;
+  const store = useStore() as ReduxStoreManager;
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        Object.entries(reducers).forEach(([name, reducer]) => {
-            store.reducerManager.add(name as StateSchemaKey, reducer);
-            dispatch({ type: `@INIT ${name} reducer` });
+  useEffect(() => {
+    Object.entries(reducers).forEach(([name, reducer]) => {
+      store.reducerManager.add(name as StateSchemaKey, reducer);
+      dispatch({ type: `@INIT ${name} reducer` });
+    });
+    return () => {
+      if (removeAfterUnmount) {
+        Object.entries(reducers).forEach(([name]) => {
+          store.reducerManager.remove(name as StateSchemaKey);
+          dispatch({ type: `@DESTROY ${name} reducer` });
         });
-        return () => {
-            if (removeAfterUnmount) {
-                Object.entries(reducers).forEach(([name]) => {
-                    store.reducerManager.remove(name as StateSchemaKey);
-                    dispatch({ type: `@DESTROY ${name} reducer` });
-                });
-            }
-        };
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    return (
+  }, []);
+  return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
-        <>{children}</>
-    );
+    <>{children}</>
+  );
 };

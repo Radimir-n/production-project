@@ -4,63 +4,63 @@ import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData'
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 
 const initialState: ProfileSchema = {
-    readonly: true,
-    isLoading: false,
-    error: undefined,
-    data: undefined,
+  readonly: true,
+  isLoading: false,
+  error: undefined,
+  data: undefined,
 };
 
 export const profileSlice = createSlice({
-    name: 'profile',
-    initialState,
-    reducers: {
-        setReadonly: (state, action: PayloadAction<boolean>) => {
-            state.readonly = action.payload;
-        },
-        candcelEdit: (state) => {
-            state.readonly = true;
-            state.validateErrors = undefined;
-            state.form = state.data;
-        },
-        updateProfile: (state, action: PayloadAction<Profile>) => {
-            state.form = {
-                ...state.form,
-                ...action.payload,
-            };
-        },
+  name: 'profile',
+  initialState,
+  reducers: {
+    setReadonly: (state, action: PayloadAction<boolean>) => {
+      state.readonly = action.payload;
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProfileData.pending, (state) => {
-                state.error = undefined;
-                state.isLoading = true;
-            })
-            .addCase(fetchProfileData.fulfilled, (state, action: PayloadAction<Profile>) => {
-                state.isLoading = false;
-                state.data = action.payload;
-                state.form = action.payload;
-            })
-            .addCase(fetchProfileData.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload;
-            })
-        // updateProfileData
-            .addCase(updateProfileData.pending, (state) => {
-                state.validateErrors = undefined;
-                state.isLoading = true;
-                state.readonly = true;
-            })
-            .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<Profile>) => {
-                state.isLoading = false;
-                state.data = action.payload;
-                state.form = action.payload;
-                state.validateErrors = undefined;
-            })
-            .addCase(updateProfileData.rejected, (state, action) => {
-                state.isLoading = false;
-                state.validateErrors = action.payload;
-            });
+    candcelEdit: (state) => {
+      state.readonly = true;
+      state.validateErrors = undefined;
+      state.form = state.data;
     },
+    updateProfile: (state, action: PayloadAction<Profile>) => {
+      state.form = {
+        ...state.form,
+        ...action.payload,
+      };
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProfileData.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(fetchProfileData.fulfilled, (state, action: PayloadAction<Profile>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+        state.form = action.payload;
+      })
+      .addCase(fetchProfileData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+    // updateProfileData
+      .addCase(updateProfileData.pending, (state) => {
+        state.validateErrors = undefined;
+        state.isLoading = true;
+        state.readonly = true;
+      })
+      .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<Profile>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+        state.form = action.payload;
+        state.validateErrors = undefined;
+      })
+      .addCase(updateProfileData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.validateErrors = action.payload;
+      });
+  },
 });
 
 // Action creators are generated for each case reducer function
