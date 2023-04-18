@@ -44,14 +44,14 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
 
   const renderBlock = useCallback((block: ArticleBlock) => {
     switch (block.type) {
-      case ArticleBlockType.CODE:
-        return <ArticleCodeBlockComponent key={block.id} className={cls.block} block={block} />;
-      case ArticleBlockType.IMAGE:
-        return <ArticleImageBlockComponent key={block.id} className={cls.block} block={block} />;
-      case ArticleBlockType.TEXT:
-        return <ArticleTextBlockComponent key={block.id} className={cls.block} block={block} />;
-      default:
-        return null;
+    case ArticleBlockType.CODE:
+      return <ArticleCodeBlockComponent key={block.id} className={cls.block} block={block} />;
+    case ArticleBlockType.IMAGE:
+      return <ArticleImageBlockComponent key={block.id} className={cls.block} block={block} />;
+    case ArticleBlockType.TEXT:
+      return <ArticleTextBlockComponent key={block.id} className={cls.block} block={block} />;
+    default:
+      return null;
     }
   }, []);
 
@@ -64,11 +64,11 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
   if (isLoading) {
     content = (
       <>
-        <Skeleton className={cls.avatar} width={200} height={200} border='50%' />
+        <Skeleton className={cls.avatar} width={200} height={200} border="50%" />
         <Skeleton className={cls.title} width={300} height={24} />
         <Skeleton className={cls.skeleton} width={600} height={32} />
-        <Skeleton className={cls.skeleton} width='100%' height={200} />
-        <Skeleton className={cls.skeleton} width='100%' height={200} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
       </>
     );
   } else if (error) {
