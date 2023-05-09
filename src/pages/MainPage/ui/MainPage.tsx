@@ -1,4 +1,4 @@
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page/Page';
 
 const MainPage = () => (
   // eslint-disable-next-line i18next/no-literal-string
