@@ -14,8 +14,15 @@ import {
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextSize } from 'shared/ui/Text/Text';
 import { Page } from 'widgets/Page/Page';
+import { ArticleList } from 'enteties/Article/ui/ArticleList/ArticleList';
+import {
+  fetchArticleRecommendations,
+} from 'pages/ArticleDetailsPage/model/services/fetchArticleRecommendations/fetchArticleRecommendations';
+import { articleDetailsPageReducer } from 'pages/ArticleDetailsPage/model/slices';
+import { getArticleRecommendations } from 'pages/ArticleDetailsPage/model/slices/articleDetailsPageRecommendationsSlice';
+import { getArticleRecommendationsIsLoading } from 'pages/ArticleDetailsPage/model/selectors/recommendations';
 import
 {
   addCommentForArticle,
@@ -36,7 +43,7 @@ interface ArticleDetailsPageProps {
 }
 
 const reducers: ReducersList = {
-  articleDetailsComments: articleDetailsCommentsReducer,
+  articleDetailsPage: articleDetailsPageReducer,
 };
 
 const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
@@ -45,9 +52,14 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
   const dispacth = useAppDispatch();
   const comments = useSelector(getArticleComments.selectAll);
   const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
+  const recommendations = useSelector(getArticleRecommendations.selectAll);
+  const recommendationsIsLoading = useSelector(getArticleRecommendationsIsLoading);
   const navigate = useNavigate();
 
-  useInitialEffect(() => dispacth(fetchCommentsByArticleId(id)));
+  useInitialEffect(() => {
+    dispacth(fetchCommentsByArticleId(id));
+    dispacth(fetchArticleRecommendations());
+  });
 
   const onSendComment = useCallback((text:string) => {
     dispacth(addCommentForArticle(text));
@@ -70,7 +82,14 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
           {t('Назад к списку')}
         </Button>
         <ArticleDetails id={id} />
-        <Text className={cls.commentTitle} title={t('Комментарии')} />
+        <Text size={TextSize.L} className={cls.commentTitle} title={t('Рекомендуем')} />
+        <ArticleList
+          className={cls.recommendations}
+          articles={recommendations}
+          isLoading={recommendationsIsLoading}
+          target="_blank"
+        />
+        <Text size={TextSize.L} className={cls.commentTitle} title={t('Комментарии')} />
         <AddCommentForm onSendComment={onSendComment} />
         <CommentList isLoading={commentsIsLoading} comments={comments} />
       </Page>

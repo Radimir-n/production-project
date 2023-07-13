@@ -7,10 +7,12 @@ import { UserSchema } from 'enteties/User';
 import { AddCommentFormSchema } from 'features/addCommentForm';
 import { LoginSchema } from 'features/AuthByUsername';
 import { SaveScrollPositionSchema } from 'features/SaveScrollPosition';
-import { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
+import {
+  ArticleDetailsCommentsSchema,
+  ArticleDetailsPageSchema,
+  ArticleDetailsRecommendationsSchema,
+} from 'pages/ArticleDetailsPage';
 import { ArticlesPageSchema } from 'pages/ArticlePage/model/types/articlesPageSchema';
-
-import { NavigateOptions, To } from 'react-router-dom';
 
 export interface StateSchema {
   user: UserSchema;
@@ -20,9 +22,9 @@ export interface StateSchema {
   loginForm?: LoginSchema;
   profile?: ProfileSchema;
   articleDetails?: ArticleDetailsSchema;
-  articleDetailsComments?: ArticleDetailsCommentsSchema;
   addCommentForm?:AddCommentFormSchema;
   articlesPage?:ArticlesPageSchema
+  articleDetailsPage?: ArticleDetailsPageSchema
 
 }
 
