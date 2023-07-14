@@ -1,4 +1,5 @@
-import { ArticleTypeTabs } from './ui/ArticleTypeTabs/ArticleTypeTabs';
+export { getArticleDetails } from './model/selectors/articleDetails';
+export { ArticleTypeTabs } from './ui/ArticleTypeTabs/ArticleTypeTabs';
 
 export { ArticleSortSelector } from './ui/ArticleSortSelector/ArticleSortSelector';
 

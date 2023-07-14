@@ -8,9 +8,7 @@ import { AddCommentFormSchema } from 'features/addCommentForm';
 import { LoginSchema } from 'features/AuthByUsername';
 import { SaveScrollPositionSchema } from 'features/SaveScrollPosition';
 import {
-  ArticleDetailsCommentsSchema,
   ArticleDetailsPageSchema,
-  ArticleDetailsRecommendationsSchema,
 } from 'pages/ArticleDetailsPage';
 import { ArticlesPageSchema } from 'pages/ArticlePage/model/types/articlesPageSchema';
 
